@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KioscoInformaticoServices.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace KioscoInformaticoServices.Models;
@@ -15,7 +16,7 @@ public partial class Proveedor
 
     public string Cbu { get; set; } = null!;
 
-    public int CondicionIva { get; set; }
+    public CondicionIvaEnum CondicionIva { get; set; }
 
     public int? LocalidadId { get; set; }
 
