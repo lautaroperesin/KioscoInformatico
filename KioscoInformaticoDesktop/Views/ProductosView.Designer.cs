@@ -37,6 +37,10 @@
             dataGridProductos = new DataGridView();
             tabControl1 = new TabControl();
             tabPageLista = new TabPage();
+            btnSalir = new FontAwesome.Sharp.IconButton();
+            btnBuscar = new FontAwesome.Sharp.IconButton();
+            txtBuscar = new TextBox();
+            label4 = new Label();
             tabPageAgregarEditar = new TabPage();
             label3 = new Label();
             numericPrecio = new NumericUpDown();
@@ -153,6 +157,10 @@
             // 
             // tabPageLista
             // 
+            tabPageLista.Controls.Add(btnSalir);
+            tabPageLista.Controls.Add(btnBuscar);
+            tabPageLista.Controls.Add(txtBuscar);
+            tabPageLista.Controls.Add(label4);
             tabPageLista.Controls.Add(btnAgregar);
             tabPageLista.Controls.Add(btnEliminar);
             tabPageLista.Controls.Add(dataGridProductos);
@@ -165,6 +173,54 @@
             tabPageLista.TabIndex = 0;
             tabPageLista.Text = "Lista";
             tabPageLista.UseVisualStyleBackColor = true;
+            // 
+            // btnSalir
+            // 
+            btnSalir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnSalir.IconChar = FontAwesome.Sharp.IconChar.Close;
+            btnSalir.IconColor = Color.Black;
+            btnSalir.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnSalir.IconSize = 35;
+            btnSalir.ImageAlign = ContentAlignment.MiddleLeft;
+            btnSalir.Location = new Point(771, 312);
+            btnSalir.Name = "btnSalir";
+            btnSalir.Size = new Size(125, 61);
+            btnSalir.TabIndex = 23;
+            btnSalir.Text = "Salir";
+            btnSalir.UseVisualStyleBackColor = true;
+            // 
+            // btnBuscar
+            // 
+            btnBuscar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnBuscar.IconChar = FontAwesome.Sharp.IconChar.Search;
+            btnBuscar.IconColor = Color.Black;
+            btnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnBuscar.IconSize = 35;
+            btnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnBuscar.Location = new Point(771, 32);
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Size = new Size(125, 61);
+            btnBuscar.TabIndex = 22;
+            btnBuscar.Text = "Buscar";
+            btnBuscar.UseVisualStyleBackColor = true;
+            btnBuscar.Click += btnBuscar_Click;
+            // 
+            // txtBuscar
+            // 
+            txtBuscar.Location = new Point(67, 66);
+            txtBuscar.Name = "txtBuscar";
+            txtBuscar.Size = new Size(635, 27);
+            txtBuscar.TabIndex = 21;
+            txtBuscar.TextChanged += txtBuscar_TextChanged;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(6, 69);
+            label4.Name = "label4";
+            label4.Size = new Size(55, 20);
+            label4.TabIndex = 20;
+            label4.Text = "Buscar:";
             // 
             // tabPageAgregarEditar
             // 
@@ -261,6 +317,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridProductos).EndInit();
             tabControl1.ResumeLayout(false);
             tabPageLista.ResumeLayout(false);
+            tabPageLista.PerformLayout();
             tabPageAgregarEditar.ResumeLayout(false);
             tabPageAgregarEditar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericPrecio).EndInit();
@@ -284,5 +341,9 @@
         private Label label2;
         private Label label3;
         private NumericUpDown numericPrecio;
+        private FontAwesome.Sharp.IconButton btnSalir;
+        private FontAwesome.Sharp.IconButton btnBuscar;
+        private TextBox txtBuscar;
+        private Label label4;
     }
 }
