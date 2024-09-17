@@ -48,6 +48,7 @@ namespace KioscoInformaticoDesktop.Views
             if (productoCurrent != null)
             {
                 productoCurrent.Nombre = txtNombre.Text;
+                productoCurrent.Precio = numericPrecio.Value;
                 await productoService.UpdateAsync(productoCurrent);
                 productoCurrent = null;
             }
@@ -55,12 +56,14 @@ namespace KioscoInformaticoDesktop.Views
             {
                 Producto producto = new Producto()
                 {
-                    Nombre = txtNombre.Text
+                    Nombre = txtNombre.Text,
+                    Precio = numericPrecio.Value
                 };
                 await productoService.AddAsync(producto);
             }
             await CargarGrilla();
             txtNombre.Text = string.Empty;
+            numericPrecio.Value = 0;
             tabControl1.SelectedTab = tabPageLista;
         }
 
