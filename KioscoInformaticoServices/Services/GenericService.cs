@@ -12,9 +12,9 @@ namespace KioscoInformaticoServices.Services
 {
     public class GenericService<T> : IGenericService<T> where T : class
     {
-        private readonly HttpClient client;
-        private readonly JsonSerializerOptions options;
-        private readonly string _endpoint;
+        protected readonly HttpClient client;
+        protected readonly JsonSerializerOptions options;
+        protected readonly string _endpoint;
 
         public GenericService()
         {
@@ -32,7 +32,7 @@ namespace KioscoInformaticoServices.Services
             {
                 throw new ApplicationException(content?.ToString());
             }
-            return JsonSerializer.Deserialize<List<T>>(content, options); ;
+            return JsonSerializer.Deserialize<List<T>>(content, options);
         }
 
         public async Task<T?> GetByIdAsync(int id)

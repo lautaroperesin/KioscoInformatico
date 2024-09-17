@@ -201,6 +201,7 @@
             dataGridLocalidades.AllowUserToAddRows = false;
             dataGridLocalidades.AllowUserToDeleteRows = false;
             dataGridLocalidades.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridLocalidades.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridLocalidades.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridLocalidades.Location = new Point(0, 88);
             dataGridLocalidades.Name = "dataGridLocalidades";
