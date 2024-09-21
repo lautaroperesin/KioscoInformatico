@@ -41,16 +41,18 @@
             txtBuscar = new TextBox();
             label4 = new Label();
             tabPageAgregarEditar = new TabPage();
+            comboBoxLocalidad = new ComboBox();
+            dateTimeNacimiento = new DateTimePicker();
+            label7 = new Label();
+            txtTelefonos = new TextBox();
+            label6 = new Label();
+            label5 = new Label();
+            txtDireccion = new TextBox();
+            label3 = new Label();
             btnCancelar = new FontAwesome.Sharp.IconButton();
             btnGuardar = new FontAwesome.Sharp.IconButton();
             txtNombre = new TextBox();
             label2 = new Label();
-            textBox1 = new TextBox();
-            label3 = new Label();
-            textBox2 = new TextBox();
-            label5 = new Label();
-            textBox3 = new TextBox();
-            label6 = new Label();
             panel1.SuspendLayout();
             tabControlLista.SuspendLayout();
             tabPageLista.SuspendLayout();
@@ -121,6 +123,7 @@
             btnSalir.TabIndex = 31;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.Click += btnSalir_Click;
             // 
             // btnBuscar
             // 
@@ -212,6 +215,7 @@
             txtBuscar.Name = "txtBuscar";
             txtBuscar.Size = new Size(570, 23);
             txtBuscar.TabIndex = 25;
+            txtBuscar.TextChanged += txtBuscar_TextChanged;
             // 
             // label4
             // 
@@ -224,11 +228,13 @@
             // 
             // tabPageAgregarEditar
             // 
-            tabPageAgregarEditar.Controls.Add(textBox3);
+            tabPageAgregarEditar.Controls.Add(comboBoxLocalidad);
+            tabPageAgregarEditar.Controls.Add(dateTimeNacimiento);
+            tabPageAgregarEditar.Controls.Add(label7);
+            tabPageAgregarEditar.Controls.Add(txtTelefonos);
             tabPageAgregarEditar.Controls.Add(label6);
-            tabPageAgregarEditar.Controls.Add(textBox2);
             tabPageAgregarEditar.Controls.Add(label5);
-            tabPageAgregarEditar.Controls.Add(textBox1);
+            tabPageAgregarEditar.Controls.Add(txtDireccion);
             tabPageAgregarEditar.Controls.Add(label3);
             tabPageAgregarEditar.Controls.Add(btnCancelar);
             tabPageAgregarEditar.Controls.Add(btnGuardar);
@@ -241,6 +247,74 @@
             tabPageAgregarEditar.TabIndex = 1;
             tabPageAgregarEditar.Text = "Agregar/Editar";
             tabPageAgregarEditar.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxLocalidad
+            // 
+            comboBoxLocalidad.FormattingEnabled = true;
+            comboBoxLocalidad.Location = new Point(302, 213);
+            comboBoxLocalidad.Name = "comboBoxLocalidad";
+            comboBoxLocalidad.Size = new Size(228, 23);
+            comboBoxLocalidad.TabIndex = 27;
+            // 
+            // dateTimeNacimiento
+            // 
+            dateTimeNacimiento.Format = DateTimePickerFormat.Short;
+            dateTimeNacimiento.Location = new Point(302, 176);
+            dateTimeNacimiento.Name = "dateTimeNacimiento";
+            dateTimeNacimiento.Size = new Size(228, 23);
+            dateTimeNacimiento.TabIndex = 26;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(228, 216);
+            label7.Name = "label7";
+            label7.Size = new Size(61, 15);
+            label7.TabIndex = 24;
+            label7.Text = "Localidad:";
+            // 
+            // txtTelefonos
+            // 
+            txtTelefonos.Location = new Point(302, 135);
+            txtTelefonos.Margin = new Padding(3, 2, 3, 2);
+            txtTelefonos.Name = "txtTelefonos";
+            txtTelefonos.Size = new Size(228, 23);
+            txtTelefonos.TabIndex = 23;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(228, 143);
+            label6.Name = "label6";
+            label6.Size = new Size(60, 15);
+            label6.TabIndex = 22;
+            label6.Text = "Teléfonos:";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(176, 184);
+            label5.Name = "label5";
+            label5.Size = new Size(120, 15);
+            label5.TabIndex = 20;
+            label5.Text = "Fecha de nacimiento:";
+            // 
+            // txtDireccion
+            // 
+            txtDireccion.Location = new Point(302, 99);
+            txtDireccion.Margin = new Padding(3, 2, 3, 2);
+            txtDireccion.Name = "txtDireccion";
+            txtDireccion.Size = new Size(228, 23);
+            txtDireccion.TabIndex = 19;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(228, 101);
+            label3.Name = "label3";
+            label3.Size = new Size(60, 15);
+            label3.TabIndex = 18;
+            label3.Text = "Dirección:";
             // 
             // btnCancelar
             // 
@@ -290,57 +364,6 @@
             label2.TabIndex = 14;
             label2.Text = "Nombre:";
             // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(302, 99);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(228, 23);
-            textBox1.TabIndex = 19;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(228, 101);
-            label3.Name = "label3";
-            label3.Size = new Size(54, 15);
-            label3.TabIndex = 18;
-            label3.Text = "Nombre:";
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(302, 176);
-            textBox2.Margin = new Padding(3, 2, 3, 2);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(228, 23);
-            textBox2.TabIndex = 21;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(228, 179);
-            label5.Name = "label5";
-            label5.Size = new Size(54, 15);
-            label5.TabIndex = 20;
-            label5.Text = "Nombre:";
-            // 
-            // textBox3
-            // 
-            textBox3.Location = new Point(302, 135);
-            textBox3.Margin = new Padding(3, 2, 3, 2);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(228, 23);
-            textBox3.TabIndex = 23;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(228, 137);
-            label6.Name = "label6";
-            label6.Size = new Size(54, 15);
-            label6.TabIndex = 22;
-            label6.Text = "Nombre:";
-            // 
             // ClientesView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -349,6 +372,7 @@
             Controls.Add(tabControlLista);
             Controls.Add(panel1);
             Name = "ClientesView";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Clientes";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -380,11 +404,13 @@
         private FontAwesome.Sharp.IconButton btnGuardar;
         private TextBox txtNombre;
         private Label label2;
-        private TextBox textBox3;
+        private TextBox txtTelefonos;
         private Label label6;
-        private TextBox textBox2;
         private Label label5;
-        private TextBox textBox1;
+        private TextBox txtDireccion;
         private Label label3;
+        private Label label7;
+        private DateTimePicker dateTimeNacimiento;
+        private ComboBox comboBoxLocalidad;
     }
 }
