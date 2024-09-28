@@ -22,6 +22,9 @@
                     <td>
                         <a href="/editarlocalidad?IdLocalidadEditada=@localidad.Id">Editar</a>
                     </td>
+                    <td>
+                        <button title="Eliminar" @onclick="@(()=>Elimnar(localidad))">Eliminar</button>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -38,5 +41,12 @@ else
     protected override async Task OnInitializedAsync()
     {
         localidades = await LocalidadService.GetAllAsync();
+    }
+
+    private async void Elimnar(Localidad localidad)
+    {
+        await LocalidadService.DeleteAsync(localidad.Id);
+        localidades = await LocalidadService.GetAllAsync();
+        StateHasChanged();
     }
 }
