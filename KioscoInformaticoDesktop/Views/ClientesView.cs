@@ -24,7 +24,7 @@ namespace KioscoInformaticoDesktop.Views
         public ClientesView()
         {
             InitializeComponent();
-            dataGridLocalidades.DataSource = listaClientes;
+            dataGridClientes.DataSource = listaClientes;
             CargarGrilla();
             CargarCombo();
         }
@@ -38,8 +38,9 @@ namespace KioscoInformaticoDesktop.Views
 
         private async Task CargarGrilla()
         {
-            listaClientes.DataSource = await clienteService.GetAllAsync();
+            listaClientes.DataSource = await clienteService.GetAllAsync(null);
             listaAFiltrar = (List<Cliente>)listaClientes.DataSource;
+            dataGridClientes.Columns["LocalidadId"].Visible = false;
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
