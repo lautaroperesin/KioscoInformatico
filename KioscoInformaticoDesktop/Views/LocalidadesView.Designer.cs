@@ -57,18 +57,17 @@
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel1.Controls.Add(label1);
             panel1.Location = new Point(2, 1);
-            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(805, 63);
+            panel1.Size = new Size(920, 84);
             panel1.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            label1.Location = new Point(18, 15);
+            label1.Location = new Point(21, 20);
             label1.Name = "label1";
-            label1.Size = new Size(134, 30);
+            label1.Size = new Size(168, 37);
             label1.TabIndex = 0;
             label1.Text = "Localidades";
             // 
@@ -77,11 +76,10 @@
             tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControl1.Controls.Add(tabPageLista);
             tabControl1.Controls.Add(tabPageAgregarEditar);
-            tabControl1.Location = new Point(2, 64);
-            tabControl1.Margin = new Padding(3, 2, 3, 2);
+            tabControl1.Location = new Point(2, 85);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(805, 331);
+            tabControl1.Size = new Size(920, 441);
             tabControl1.TabIndex = 1;
             // 
             // tabPageLista
@@ -94,11 +92,10 @@
             tabPageLista.Controls.Add(btnModificar);
             tabPageLista.Controls.Add(btnAgregar);
             tabPageLista.Controls.Add(dataGridLocalidades);
-            tabPageLista.Location = new Point(4, 24);
-            tabPageLista.Margin = new Padding(3, 2, 3, 2);
+            tabPageLista.Location = new Point(4, 29);
             tabPageLista.Name = "tabPageLista";
-            tabPageLista.Padding = new Padding(3, 2, 3, 2);
-            tabPageLista.Size = new Size(797, 303);
+            tabPageLista.Padding = new Padding(3, 3, 3, 3);
+            tabPageLista.Size = new Size(912, 408);
             tabPageLista.TabIndex = 0;
             tabPageLista.Text = "Lista";
             tabPageLista.UseVisualStyleBackColor = true;
@@ -111,10 +108,9 @@
             btnSalir.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSalir.IconSize = 35;
             btnSalir.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSalir.Location = new Point(681, 218);
-            btnSalir.Margin = new Padding(3, 2, 3, 2);
+            btnSalir.Location = new Point(778, 291);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(109, 46);
+            btnSalir.Size = new Size(125, 61);
             btnSalir.TabIndex = 25;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = true;
@@ -128,10 +124,9 @@
             btnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnBuscar.IconSize = 35;
             btnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnBuscar.Location = new Point(681, 16);
-            btnBuscar.Margin = new Padding(3, 2, 3, 2);
+            btnBuscar.Location = new Point(778, 21);
             btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(109, 46);
+            btnBuscar.Size = new Size(125, 61);
             btnBuscar.TabIndex = 24;
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = true;
@@ -139,19 +134,18 @@
             // 
             // txtBuscar
             // 
-            txtBuscar.Location = new Point(59, 38);
-            txtBuscar.Margin = new Padding(3, 2, 3, 2);
+            txtBuscar.Location = new Point(67, 51);
             txtBuscar.Name = "txtBuscar";
-            txtBuscar.Size = new Size(570, 23);
+            txtBuscar.Size = new Size(651, 27);
             txtBuscar.TabIndex = 23;
             txtBuscar.TextChanged += txtBuscar_TextChanged;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(5, 44);
+            label4.Location = new Point(6, 59);
             label4.Name = "label4";
-            label4.Size = new Size(45, 15);
+            label4.Size = new Size(55, 20);
             label4.TabIndex = 22;
             label4.Text = "Buscar:";
             // 
@@ -163,10 +157,9 @@
             btnEliminar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnEliminar.IconSize = 35;
             btnEliminar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnEliminar.Location = new Point(681, 167);
-            btnEliminar.Margin = new Padding(3, 2, 3, 2);
+            btnEliminar.Location = new Point(778, 223);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(109, 46);
+            btnEliminar.Size = new Size(125, 61);
             btnEliminar.TabIndex = 15;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
@@ -180,10 +173,9 @@
             btnModificar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnModificar.IconSize = 35;
             btnModificar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnModificar.Location = new Point(683, 117);
-            btnModificar.Margin = new Padding(3, 2, 3, 2);
+            btnModificar.Location = new Point(781, 156);
             btnModificar.Name = "btnModificar";
-            btnModificar.Size = new Size(109, 46);
+            btnModificar.Size = new Size(125, 61);
             btnModificar.TabIndex = 14;
             btnModificar.Text = "Modificar";
             btnModificar.UseVisualStyleBackColor = true;
@@ -197,10 +189,9 @@
             btnAgregar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnAgregar.IconSize = 35;
             btnAgregar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAgregar.Location = new Point(683, 66);
-            btnAgregar.Margin = new Padding(3, 2, 3, 2);
+            btnAgregar.Location = new Point(781, 88);
             btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(109, 46);
+            btnAgregar.Size = new Size(125, 61);
             btnAgregar.TabIndex = 13;
             btnAgregar.Text = "Agregar";
             btnAgregar.UseVisualStyleBackColor = true;
@@ -213,12 +204,11 @@
             dataGridLocalidades.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridLocalidades.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridLocalidades.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridLocalidades.Location = new Point(0, 66);
-            dataGridLocalidades.Margin = new Padding(3, 2, 3, 2);
+            dataGridLocalidades.Location = new Point(0, 88);
             dataGridLocalidades.Name = "dataGridLocalidades";
             dataGridLocalidades.ReadOnly = true;
             dataGridLocalidades.RowHeadersWidth = 51;
-            dataGridLocalidades.Size = new Size(667, 334);
+            dataGridLocalidades.Size = new Size(762, 445);
             dataGridLocalidades.TabIndex = 0;
             // 
             // tabPageAgregarEditar
@@ -227,11 +217,10 @@
             tabPageAgregarEditar.Controls.Add(btnGuardar);
             tabPageAgregarEditar.Controls.Add(txtNombre);
             tabPageAgregarEditar.Controls.Add(label2);
-            tabPageAgregarEditar.Location = new Point(4, 24);
-            tabPageAgregarEditar.Margin = new Padding(3, 2, 3, 2);
+            tabPageAgregarEditar.Location = new Point(4, 29);
             tabPageAgregarEditar.Name = "tabPageAgregarEditar";
-            tabPageAgregarEditar.Padding = new Padding(3, 2, 3, 2);
-            tabPageAgregarEditar.Size = new Size(797, 303);
+            tabPageAgregarEditar.Padding = new Padding(3, 3, 3, 3);
+            tabPageAgregarEditar.Size = new Size(912, 408);
             tabPageAgregarEditar.TabIndex = 1;
             tabPageAgregarEditar.Text = "Agregar/Editar";
             tabPageAgregarEditar.UseVisualStyleBackColor = true;
@@ -243,13 +232,13 @@
             btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCancelar.IconSize = 35;
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(425, 228);
-            btnCancelar.Margin = new Padding(3, 2, 3, 2);
+            btnCancelar.Location = new Point(486, 304);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(160, 28);
+            btnCancelar.Size = new Size(183, 37);
             btnCancelar.TabIndex = 13;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnGuardar
             // 
@@ -258,10 +247,9 @@
             btnGuardar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnGuardar.IconSize = 35;
             btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGuardar.Location = new Point(260, 228);
-            btnGuardar.Margin = new Padding(3, 2, 3, 2);
+            btnGuardar.Location = new Point(297, 304);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(160, 28);
+            btnGuardar.Size = new Size(183, 37);
             btnGuardar.TabIndex = 12;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
@@ -269,29 +257,27 @@
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(326, 34);
-            txtNombre.Margin = new Padding(3, 2, 3, 2);
+            txtNombre.Location = new Point(373, 45);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(228, 23);
+            txtNombre.Size = new Size(260, 27);
             txtNombre.TabIndex = 9;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(252, 36);
+            label2.Location = new Point(288, 48);
             label2.Name = "label2";
-            label2.Size = new Size(54, 15);
+            label2.Size = new Size(67, 20);
             label2.TabIndex = 8;
             label2.Text = "Nombre:";
             // 
             // LocalidadesView
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(808, 393);
+            ClientSize = new Size(923, 524);
             Controls.Add(tabControl1);
             Controls.Add(panel1);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "LocalidadesView";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Localidades";

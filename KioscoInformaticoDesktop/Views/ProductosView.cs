@@ -112,5 +112,13 @@ namespace KioscoInformaticoDesktop.Views
         {
             this.Close();
         }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            productoCurrent = null;
+            txtNombre.Text = string.Empty;
+            numericPrecio.Value = 0;
+            tabControl1.SelectedTab = tabPageLista;
+        }
     }
 }
