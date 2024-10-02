@@ -1,15 +1,20 @@
 ﻿@page "/localidades"
 @inject IGenericService<Localidad> LocalidadService
+@inject SweetAlertService SweetAlert;
 
-<h3>Localidades</h3>
+<HeaderPage TitlePage="Localidades" />
 
 @if (localidades != null)
 {
+    <NavLink href="agregarlocalidad">
+        Agregar localidad
+    </NavLink>
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
+                <th></th>
                 <th></th>
             </tr>
         </thead>
@@ -23,7 +28,7 @@
                         <a href="/editarlocalidad?IdLocalidadEditada=@localidad.Id">Editar</a>
                     </td>
                     <td>
-                        <button title="Eliminar" @onclick="@(()=>Elimnar(localidad))">Eliminar</button>
+                        <button title="Eliminar" class="btn btn-danger" @onclick="@(()=>Eliminar(localidad))">Eliminar</button>
                     </td>
                 </tr>
             }
@@ -43,10 +48,22 @@ else
         localidades = await LocalidadService.GetAllAsync();
     }
 
-    private async void Elimnar(Localidad localidad)
+    private async void Eliminar(Localidad localidad)
     {
-        await LocalidadService.DeleteAsync(localidad.Id);
-        localidades = await LocalidadService.GetAllAsync();
-        StateHasChanged();
+        SweetAlertResult respuesta = await SweetAlert.FireAsync(new SweetAlertOptions
+            {
+                Title = "Borrando localidad",
+                Text = $"¿Está seguro que desea borrar la localidad {localidad.Nombre}",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true,
+                ConfirmButtonText = "Si, quiero borrarla!",
+                CancelButtonText = "No, espera"
+            });
+        if (respuesta.IsConfirmed)
+        {
+            await LocalidadService.DeleteAsync(localidad.Id);
+            localidades = await LocalidadService.GetAllAsync();
+            StateHasChanged();
+        }
     }
 }
