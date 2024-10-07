@@ -1,4 +1,5 @@
-﻿using KioscoInformaticoServices.Interfaces;
+﻿using KioscoInformaticoServices.Enums;
+using KioscoInformaticoServices.Interfaces;
 using KioscoInformaticoServices.Models;
 using KioscoInformaticoServices.Services;
 using System;
@@ -16,6 +17,7 @@ namespace KioscoInformaticoDesktop.Views
     public partial class ProveedoresView : Form
     {
         IGenericService<Proveedor> proveedorService = new GenericService<Proveedor>();
+        ILocalidadService localidadService = new LocalidadService();
 
         BindingSource listaProveedores = new BindingSource();
         List<Proveedor> listaAFiltrar = new List<Proveedor>();
@@ -26,12 +28,21 @@ namespace KioscoInformaticoDesktop.Views
             InitializeComponent();
             dataGridProveedores.DataSource = listaProveedores;
             CargarGrilla();
+            CargarCombo();
+            cboCondicionIva.DataSource = Enum.GetValues(typeof(CondicionIvaEnum));
         }
 
         private async Task CargarGrilla()
         {
             listaProveedores.DataSource = await proveedorService.GetAllAsync();
             listaAFiltrar = (List<Proveedor>)listaProveedores.DataSource;
+        }
+
+        private async Task CargarCombo()
+        {
+            cboLocalidades.DataSource = await localidadService.GetAllAsync();
+            cboLocalidades.DisplayMember = "Nombre";
+            cboLocalidades.ValueMember = "Id";
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -76,7 +87,7 @@ namespace KioscoInformaticoDesktop.Views
                 txtDireccion.Text = string.Empty;
                 txtTelefonos.Text = string.Empty;
                 cboCondicionIva.SelectedIndex = -1;
-                cboLocalidad.SelectedIndex = -1;
+                cboLocalidades.SelectedIndex = -1;
                 tabControl1.SelectedTab = tabPageLista;
             }
         }
@@ -138,7 +149,7 @@ namespace KioscoInformaticoDesktop.Views
             txtDireccion.Text = string.Empty;
             txtTelefonos.Text = string.Empty;
             cboCondicionIva.SelectedIndex = -1;
-            cboLocalidad.SelectedIndex = -1;
+            cboLocalidades.SelectedIndex = -1;
             tabControl1.SelectedTab = tabPageLista;
         }
     }
