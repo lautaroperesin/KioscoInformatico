@@ -36,6 +36,7 @@ namespace KioscoInformaticoDesktop.Views
         {
             listaProveedores.DataSource = await proveedorService.GetAllAsync();
             listaAFiltrar = (List<Proveedor>)listaProveedores.DataSource;
+            dataGridProveedores.Columns["LocalidadId"].Visible = false;
         }
 
         private async Task CargarCombo()
@@ -64,8 +65,8 @@ namespace KioscoInformaticoDesktop.Views
                 proveedorCurrent.Cbu = txtCbu.Text;
                 proveedorCurrent.Direccion = txtDireccion.Text;
                 proveedorCurrent.Telefonos = txtTelefonos.Text;
-                //proveedorCurrent.CondicionIva = ;
-                //proveedorCurrent.LocalidadId = ;
+                proveedorCurrent.CondicionIva = (CondicionIvaEnum)cboCondicionIva.SelectedItem;
+                proveedorCurrent.LocalidadId = (int?)cboLocalidades.SelectedValue;
                 await proveedorService.UpdateAsync(proveedorCurrent);
                 proveedorCurrent = null;
             }
@@ -77,8 +78,8 @@ namespace KioscoInformaticoDesktop.Views
                     Cbu = txtCbu.Text,
                     Direccion = txtDireccion.Text,
                     Telefonos = txtTelefonos.Text,
-                    //CondicionIva = ,
-                    //LocalidadId = ,
+                    CondicionIva = (CondicionIvaEnum)cboCondicionIva.SelectedItem,
+                    LocalidadId = (int?)cboLocalidades.SelectedValue
                 };
                 await proveedorService.AddAsync(nuevoProveedor);
                 await CargarGrilla();
@@ -99,8 +100,8 @@ namespace KioscoInformaticoDesktop.Views
             txtCbu.Text = proveedorCurrent.Cbu;
             txtDireccion.Text = proveedorCurrent.Direccion;
             txtTelefonos.Text = proveedorCurrent.Telefonos;
-            //cboCondicionIva.SelectedItem = proveedorCurrent.CondicionIva;
-            //cboLocalidad.SelectedItem = proveedorCurrent.LocalidadId;
+            cboCondicionIva.SelectedItem = proveedorCurrent.CondicionIva;
+            cboLocalidades.SelectedItem = proveedorCurrent.LocalidadId;
             tabControl1.SelectedTab = tabPageAgregarEditar;
         }
 
