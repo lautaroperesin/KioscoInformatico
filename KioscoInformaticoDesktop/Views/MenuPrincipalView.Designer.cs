@@ -34,16 +34,18 @@
             menuItemLocalidades = new FontAwesome.Sharp.IconMenuItem();
             menuItemProductos = new FontAwesome.Sharp.IconMenuItem();
             iconMenuClientes = new FontAwesome.Sharp.IconMenuItem();
+            iconMenuProveedores = new FontAwesome.Sharp.IconMenuItem();
             iconMenuItem2 = new FontAwesome.Sharp.IconMenuItem();
             menuItemSalirDelSistema = new FontAwesome.Sharp.IconMenuItem();
-            iconMenuProveedores = new FontAwesome.Sharp.IconMenuItem();
+            iconMenuItem4 = new FontAwesome.Sharp.IconMenuItem();
+            iconMenuItem5 = new FontAwesome.Sharp.IconMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { iconMenuItem1, iconMenuItem3, iconMenuItem2 });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { iconMenuItem1, iconMenuItem3, iconMenuItem2, iconMenuItem4 });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(6, 3, 0, 3);
@@ -76,7 +78,7 @@
             menuItemLocalidades.IconColor = Color.Black;
             menuItemLocalidades.IconFont = FontAwesome.Sharp.IconFont.Auto;
             menuItemLocalidades.Name = "menuItemLocalidades";
-            menuItemLocalidades.Size = new Size(224, 26);
+            menuItemLocalidades.Size = new Size(174, 26);
             menuItemLocalidades.Text = "Localidades";
             menuItemLocalidades.Click += menuItemLocalidades_Click;
             // 
@@ -86,7 +88,7 @@
             menuItemProductos.IconColor = Color.Black;
             menuItemProductos.IconFont = FontAwesome.Sharp.IconFont.Auto;
             menuItemProductos.Name = "menuItemProductos";
-            menuItemProductos.Size = new Size(224, 26);
+            menuItemProductos.Size = new Size(174, 26);
             menuItemProductos.Text = "Productos";
             menuItemProductos.Click += menuItemProductos_Click;
             // 
@@ -96,9 +98,19 @@
             iconMenuClientes.IconColor = Color.Black;
             iconMenuClientes.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconMenuClientes.Name = "iconMenuClientes";
-            iconMenuClientes.Size = new Size(224, 26);
+            iconMenuClientes.Size = new Size(174, 26);
             iconMenuClientes.Text = "Clientes";
             iconMenuClientes.Click += iconMenuClientes_Click;
+            // 
+            // iconMenuProveedores
+            // 
+            iconMenuProveedores.IconChar = FontAwesome.Sharp.IconChar.PersonRays;
+            iconMenuProveedores.IconColor = Color.Black;
+            iconMenuProveedores.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconMenuProveedores.Name = "iconMenuProveedores";
+            iconMenuProveedores.Size = new Size(174, 26);
+            iconMenuProveedores.Text = "Proveedores";
+            iconMenuProveedores.Click += iconMenuProveedores_Click;
             // 
             // iconMenuItem2
             // 
@@ -116,19 +128,29 @@
             menuItemSalirDelSistema.IconColor = Color.Black;
             menuItemSalirDelSistema.IconFont = FontAwesome.Sharp.IconFont.Auto;
             menuItemSalirDelSistema.Name = "menuItemSalirDelSistema";
-            menuItemSalirDelSistema.Size = new Size(200, 26);
+            menuItemSalirDelSistema.Size = new Size(224, 26);
             menuItemSalirDelSistema.Text = "Salir del sistema";
             menuItemSalirDelSistema.Click += menuItemSalirDelSistema_Click;
             // 
-            // iconMenuProveedores
+            // iconMenuItem4
             // 
-            iconMenuProveedores.IconChar = FontAwesome.Sharp.IconChar.PersonRays;
-            iconMenuProveedores.IconColor = Color.Black;
-            iconMenuProveedores.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconMenuProveedores.Name = "iconMenuProveedores";
-            iconMenuProveedores.Size = new Size(224, 26);
-            iconMenuProveedores.Text = "Proveedores";
-            iconMenuProveedores.Click += iconMenuProveedores_Click;
+            iconMenuItem4.DropDownItems.AddRange(new ToolStripItem[] { iconMenuItem5 });
+            iconMenuItem4.IconChar = FontAwesome.Sharp.IconChar.None;
+            iconMenuItem4.IconColor = Color.Black;
+            iconMenuItem4.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconMenuItem4.Name = "iconMenuItem4";
+            iconMenuItem4.Size = new Size(91, 24);
+            iconMenuItem4.Text = "Listado";
+            // 
+            // iconMenuItem5
+            // 
+            iconMenuItem5.IconChar = FontAwesome.Sharp.IconChar.None;
+            iconMenuItem5.IconColor = Color.Black;
+            iconMenuItem5.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconMenuItem5.Name = "iconMenuItem5";
+            iconMenuItem5.Size = new Size(224, 26);
+            iconMenuItem5.Text = "Localidades";
+            iconMenuItem5.Click += iconMenuItem5_Click;
             // 
             // MenuPrincipalView
             // 
@@ -158,5 +180,7 @@
         private FontAwesome.Sharp.IconMenuItem menuItemProductos;
         private FontAwesome.Sharp.IconMenuItem iconMenuClientes;
         private FontAwesome.Sharp.IconMenuItem iconMenuProveedores;
+        private FontAwesome.Sharp.IconMenuItem iconMenuItem4;
+        private FontAwesome.Sharp.IconMenuItem iconMenuItem5;
     }
 }
