@@ -12,7 +12,7 @@ namespace KioscoInformaticoApp.ViewModels
 {
     public class ProductosViewModel : ObjectNotification
     {
-		private GenericService<Producto> productService= new GenericService<Producto>();
+		private ProductoService productService= new ProductoService();
         private string filterProducts;
 
 		public string FilterProducts
@@ -78,7 +78,7 @@ namespace KioscoInformaticoApp.ViewModels
         {
             FilterProducts = string.Empty;
             ActivityStart = true;
-            productListToFilter = await productService.GetAllAsync();
+            productListToFilter = await productService.GetAllInOfferAsync();
             Products = new ObservableCollection<Producto>(productListToFilter);
             ActivityStart = false;
         }
