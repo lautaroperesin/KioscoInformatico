@@ -1,10 +1,12 @@
-﻿@page "/editarcliente"
+﻿@page "/agregareditarcliente"
 @inject IClienteService ClienteService
+@inject ILocalidadService LocalidadService
 @inject NavigationManager NavigationManager
+@inject SweetAlertService SweetAlert;
 
 <HeaderPage TitlePage="Editando cliente" />
 
-@if (cliente != null)
+@if (cliente != null || localidades != null)
 {
     <EditForm Model="cliente" OnValidSubmit="Guardar">
         <DataAnnotationsValidator />
@@ -29,6 +31,17 @@
             <InputDate id="FechaNacimiento" class="form-control" @bind-Value="cliente.FechaNacimiento" />
         </div>
 
+        <div class="form-group">
+            <label for="Localidad">Localidad</label>
+            <InputSelect id="Localidad" class="form-control" @bind-Value="cliente.LocalidadId">
+                <option value="">Seleccione una localidad</option>
+                @foreach (var localidad in localidades)
+                {
+                    <option value="@localidad.Id">@localidad.Nombre</option>
+                }
+            </InputSelect>
+        </div>
+
         <button type="submit" class="btn btn-primary">Guardar</button>
         <button class="btn btn-primary mb-2" type="button" @onclick="@(()=>NavigationManager.NavigateTo("/clientes"))">Volver a la lista</button>
         <ValidationSummary />
@@ -36,7 +49,7 @@
 }
 else
 {
-    <p><em>Obteniendo el producto a editar...</em></p>
+    <p><em>Cargando...</em></p>
 }
 
 
@@ -45,16 +58,39 @@ else
     [Parameter]
     public int IdClienteEditado { get; set; }
 
-    private Cliente? cliente;
+    Cliente? cliente;
+
+    List<Localidad>? localidades = new List<Localidad>();
 
     protected override async Task OnInitializedAsync()
     {
-        cliente = await ClienteService.GetByIdAsync(IdClienteEditado);
+        if(IdClienteEditado != 0)
+        {
+            cliente = await ClienteService.GetByIdAsync(IdClienteEditado) ?? new Cliente();
+        }
+        else
+        {
+            cliente = new Cliente();
+        }
+        localidades = await LocalidadService.GetAllAsync();
     }
 
     private async void Guardar()
     {
-        await ClienteService.UpdateAsync(cliente);
+        if(cliente.LocalidadId == 0)
+        {
+            await SweetAlert.FireAsync("Advertencia", "Debe seleccionar una localidad", SweetAlertIcon.Warning);
+            return;
+        }
+
+        if (IdClienteEditado == 0)
+        {
+            await ClienteService.AddAsync(cliente);
+        }
+        else
+        {
+            await ClienteService.UpdateAsync(cliente);
+        }
         NavigationManager.NavigateTo("/clientes");
     }
 }
