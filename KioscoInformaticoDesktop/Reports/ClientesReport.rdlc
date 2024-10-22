@@ -116,23 +116,23 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <Textbox Name="Telefono">
+                        <Textbox Name="Telefonos">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Telefono.Value</Value>
+                                  <Value>=Fields!Telefonos.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Telefono</rd:DefaultName>
-                          <Top>0.03528cm</Top>
-                          <Left>8.18911cm</Left>
+                          <rd:DefaultName>Telefonos</rd:DefaultName>
+                          <Top>0.07056cm</Top>
+                          <Left>8.18912cm</Left>
                           <Height>0.6cm</Height>
                           <Width>2.5cm</Width>
                           <ZIndex>3</ZIndex>
@@ -348,7 +348,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Teléfono</Value>
+                  <Value>Teléfonos</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -461,8 +461,8 @@
           <DataField>Direccion</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Telefono">
-          <DataField>Telefono</DataField>
+        <Field Name="Telefonos">
+          <DataField>Telefonos</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>

@@ -50,5 +50,11 @@ namespace KioscoInformaticoDesktop
             ClientesViewReport clientesViewReport = new ClientesViewReport();
             clientesViewReport.ShowDialog();
         }
+
+        private void iconMenuVentas_Click(object sender, EventArgs e)
+        {
+            VentasView ventasView = new VentasView();
+            ventasView.ShowDialog();
+        }
     }
 }
