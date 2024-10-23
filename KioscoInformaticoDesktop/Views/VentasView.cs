@@ -1,4 +1,5 @@
 ﻿using KioscoInformaticoDesktop.ExtensionMethods;
+using KioscoInformaticoDesktop.ViewReports;
 using KioscoInformaticoServices.Enums;
 using KioscoInformaticoServices.Interfaces;
 using KioscoInformaticoServices.Models;
@@ -112,18 +113,21 @@ namespace KioscoInformaticoDesktop.Views
             ActualizarTotalFactura();
         }
 
-        private void btnFinalizarVenta_Click(object sender, EventArgs e)
+        private async void btnFinalizarVenta_Click(object sender, EventArgs e)
         {
-            venta.ClienteId = (int)cboClientes.SelectedValue;
-            venta.Fecha = DateTime.Now;
-            venta.FormaPago = (FormaDePagoEnum)cboFormaPago.SelectedItem;
-            venta.Total = numericTotal.Value;
-            venta.Iva = venta.Total * 0.21m;
+            var ventaTemp = venta;
+            ventaTemp.ClienteId = (int)cboClientes.SelectedValue;
+            ventaTemp.Fecha = DateTime.Now;
+            ventaTemp.FormaPago = (FormaDePagoEnum)cboFormaPago.SelectedItem;
+            ventaTemp.Total = numericTotal.Value;
+            ventaTemp.Iva = venta.Total * 0.21m;
 
-            venta.Cliente = null;
-            venta.DetallesVenta.ToList().ForEach(dv => dv.Producto = null);
-            venta.DetallesVenta.ToList().ForEach(dv => dv.Venta = null);
-            ventaService.AddAsync(venta);
+            ventaTemp.Cliente = null;
+            ventaTemp.DetallesVenta.ToList().ForEach(dv => dv.Producto = null);
+            ventaTemp.DetallesVenta.ToList().ForEach(dv => dv.Venta = null);
+            var nuevaVenta = await ventaService.AddAsync(venta);
+            var facturaVenta = new FacturaVentaViewReport(nuevaVenta);
+            facturaVenta.ShowDialog();
         }
     }
 }
