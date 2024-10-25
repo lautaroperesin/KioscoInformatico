@@ -28,11 +28,15 @@ public partial class InicioSesionView : ContentPage
         }
         if(mensaje.Value == "AgregarProducto")
         {
-            await Navigation.PushAsync(new AgregarEditarProductoView());
+            await Navigation.PushAsync(new AgregarEditarProductoView(mensaje.ProductoAEditar));
         }
         if(mensaje.Value == "CerrarVentana")
         {
             await Navigation.PopAsync();
+        }
+        if(mensaje.Value == "EditarProducto")
+        {
+            await Navigation.PushAsync(new AgregarEditarProductoView(mensaje.ProductoAEditar));
         }
     }
 }

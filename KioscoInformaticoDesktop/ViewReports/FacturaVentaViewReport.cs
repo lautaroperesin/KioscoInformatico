@@ -45,13 +45,16 @@ namespace KioscoInformaticoDesktop.ViewReports
         private void FacturaVentaViewReport_Load(object sender, EventArgs e)
         {
             reporte.LocalReport.ReportEmbeddedResource = "KioscoInformaticoDesktop.Reports.FacturaVentaReport.rdlc";
-            var venta = new { Id = nuevaVenta?.Id, Fecha = nuevaVenta?.Fecha, ClienteNombre = nuevaVenta?.Cliente.Nombre, FormaPago = nuevaVenta?.FormaPago, IVA = nuevaVenta?.Iva };
-            var detallesVenta = nuevaVenta?.DetallesVenta.Select(dv => new { ProductoNombre = dv.Producto.Nombre, Cantidad = dv.Cantidad, PrecioUnitario = dv.PrecioUnitario, Subtotal = dv.Subtotal });
+            List<object> venta = new List<object> { new { Id = nuevaVenta.Id, Fecha = nuevaVenta.Fecha, ClienteNombre = nuevaVenta.Cliente.Nombre, Total = nuevaVenta.Total, Iva = nuevaVenta.Iva, FormaPago = nuevaVenta.FormaPago } };
+
+
+
+            var detalleVenta = nuevaVenta.DetallesVenta.Select(detalle => new { ProductoNombre = detalle.Producto.Nombre, PrecioUnitario = detalle.PrecioUnitario, Cantidad = detalle.Cantidad, Subtotal = detalle.Subtotal });
+
 
             reporte.LocalReport.DataSources.Add(new ReportDataSource("DSVenta", venta));
-            reporte.LocalReport.DataSources.Add(new ReportDataSource("DSDetallesVenta", detallesVenta));
+            reporte.LocalReport.DataSources.Add(new ReportDataSource("DSDetallesVenta", detalleVenta));
             reporte.SetDisplayMode(DisplayMode.PrintLayout);
-            reporte.ZoomMode = ZoomMode.Percent;
             reporte.RefreshReport();
         }
     }

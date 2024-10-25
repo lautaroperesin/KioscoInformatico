@@ -13,6 +13,24 @@ namespace KioscoInformaticoApp.ViewModels
     public class AgregarEditarProductoViewModel : ObjectNotification
     {
 		ProductoService productoService = new ProductoService();
+		private Producto editProduct;
+
+		public Producto EditProduct
+		{
+			get { return editProduct; }
+			set { editProduct = value;
+				OnPropertyChanged();
+				SettingData();
+            }
+		}
+
+		private void SettingData()
+		{
+			Nombre = editProduct.Nombre;
+			Precio = editProduct.Precio;
+			Oferta = editProduct.Oferta;
+        }
+
         private string nombre;
 
 		public string Nombre
@@ -52,13 +70,23 @@ namespace KioscoInformaticoApp.ViewModels
 
 		private async Task SaveProduct()
 		{
-			var producto = new Producto()
+            if (EditProduct != null)
+            {
+                editProduct.Nombre = Nombre;
+                editProduct.Precio = Precio;
+                editProduct.Oferta = Oferta;
+                await productoService.UpdateAsync(editProduct);
+            }
+			else
 			{
-				Nombre = Nombre,
-				Precio = Precio,
-				Oferta = Oferta
-			};
-			await productoService.AddAsync(producto);
+                var producto = new Producto()
+                {
+                    Nombre = Nombre,
+                    Precio = Precio,
+                    Oferta = Oferta
+                };
+                await productoService.AddAsync(producto);
+            }
             WeakReferenceMessenger.Default.Send(new Message("CerrarVentana"));
         }
     }

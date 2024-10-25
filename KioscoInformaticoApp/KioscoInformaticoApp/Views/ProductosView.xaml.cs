@@ -15,5 +15,6 @@ public partial class ProductosView : ContentPage
         var viewmodel = this.BindingContext as ProductosViewModel;
 
         viewmodel.GetProducts();
+        viewmodel.SelectedProduct = null;
     }
 }

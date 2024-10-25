@@ -48,9 +48,21 @@ namespace KioscoInformaticoApp.ViewModels
 
         private List<Producto>? productListToFilter;
 
+        private Producto selectedProduct;
+
+        public Producto SelectedProduct
+        {
+            get { return selectedProduct; }
+            set { selectedProduct = value;
+                OnPropertyChanged();
+                EditProductCommand.ChangeCanExecute();
+            }
+        }
+
         public Command GetProductsCommand { get; }
 		public Command FilterProductsCommand { get; }
         public Command AddProductCommand { get; }
+        public Command EditProductCommand { get; }
 
         public ProductosViewModel()
         {
@@ -58,7 +70,18 @@ namespace KioscoInformaticoApp.ViewModels
             //GetProductsInOffer = new Command(async () => await GetProductsInOffer());
             FilterProductsCommand = new Command(async () => await FiltrarProductos());
             AddProductCommand = new Command(async () => await AddProduct());
+            EditProductCommand = new Command(async (obj) => await EditProduct(), AllowEdit);
             GetProducts();
+        }
+
+        private bool AllowEdit(object arg)
+        {
+            return SelectedProduct != null; 
+        }
+
+        private async Task EditProduct()
+        {
+            WeakReferenceMessenger.Default.Send(new Message("EditarProducto") { ProductoAEditar = selectedProduct });
         }
 
         private async Task AddProduct()

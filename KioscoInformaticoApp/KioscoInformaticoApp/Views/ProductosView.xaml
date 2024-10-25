@@ -14,12 +14,12 @@
             VerticalOptions="Center" 
             FontSize="Header"
             HorizontalOptions="Center" />
-        <Entry Placeholder="Buscar productos..."
+            <Entry Placeholder="Buscar productos..."
                Text="{Binding FilterProducts}"
                HorizontalOptions="Center"
                VerticalOptions="Center"/>
-        <ActivityIndicator IsRunning="{Binding ActivityStart}"/>
             <ListView ItemsSource="{Binding Products}"
+                      SelectedItem="{Binding SelectedProduct}"
                       SelectionMode="Single"
                       IsPullToRefreshEnabled="True"
                       RefreshCommand="{Binding GetProductsCommand}"
@@ -36,6 +36,10 @@
                     Command="{Binding AddProductCommand}"
                     HorizontalOptions="Center"
                     Margin="0,10,0,10"/>
-    </VerticalStackLayout>
+            <Button Text="Editar producto"
+                    Command="{Binding EditProductCommand}"
+                    HorizontalOptions="Center"
+                    Margin="0,10,0,10"/>
+        </VerticalStackLayout>
      </ScrollView>
 </ContentPage>
