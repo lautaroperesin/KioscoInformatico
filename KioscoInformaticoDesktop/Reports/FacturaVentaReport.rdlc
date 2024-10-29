@@ -72,7 +72,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!PrecioUnitario.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>0.00;(0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -130,7 +132,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!Subtotal.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>0.00;(0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -307,7 +311,7 @@
   <Width>6.5in</Width>
   <Page>
     <PageHeader>
-      <Height>2.90576cm</Height>
+      <Height>3.22326cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -350,7 +354,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>=Sum(Fields!Id.Value, "DSVenta")</Value>
-                  <Style />
+                  <Style>
+                    <Format>0000000</Format>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
@@ -470,7 +476,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>=First(Fields!Fecha.Value, "DSVenta")</Value>
-                  <Style />
+                  <Style>
+                    <Format>d</Format>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
@@ -665,7 +673,7 @@
           <Top>0.53873cm</Top>
           <Left>7.54475cm</Left>
           <Height>0.6cm</Height>
-          <Width>2.28833cm</Width>
+          <Width>2.54233cm</Width>
           <ZIndex>2</ZIndex>
           <Style>
             <Border>
@@ -685,7 +693,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>=Sum(Fields!IVA.Value, "DSVenta")</Value>
-                  <Style />
+                  <Style>
+                    <Format>0.00;(0.00)</Format>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
@@ -715,7 +725,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>=Sum(Fields!Total.Value, "DSVenta")</Value>
-                  <Style />
+                  <Style>
+                    <Format>0.00;(0.00)</Format>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
@@ -723,7 +735,7 @@
           </Paragraphs>
           <rd:DefaultName>Total</rd:DefaultName>
           <Top>0.53873cm</Top>
-          <Left>10.00947cm</Left>
+          <Left>10.57158cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
           <ZIndex>4</ZIndex>

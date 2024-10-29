@@ -45,9 +45,7 @@ namespace KioscoInformaticoDesktop.ViewReports
         private void FacturaVentaViewReport_Load(object sender, EventArgs e)
         {
             reporte.LocalReport.ReportEmbeddedResource = "KioscoInformaticoDesktop.Reports.FacturaVentaReport.rdlc";
-            List<object> venta = new List<object> { new { Id = nuevaVenta.Id, Fecha = nuevaVenta.Fecha, ClienteNombre = nuevaVenta.Cliente.Nombre, Total = nuevaVenta.Total, Iva = nuevaVenta.Iva, FormaPago = nuevaVenta.FormaPago } };
-
-
+            List<object> venta = new List<object> { new { Id = nuevaVenta.Id, Fecha = nuevaVenta.Fecha, ClienteNombre = nuevaVenta.Cliente.Nombre, Total = nuevaVenta.Total, IVA = nuevaVenta.Iva, FormaPago = nuevaVenta.FormaPago.ToString() } };
 
             var detalleVenta = nuevaVenta.DetallesVenta.Select(detalle => new { ProductoNombre = detalle.Producto.Nombre, PrecioUnitario = detalle.PrecioUnitario, Cantidad = detalle.Cantidad, Subtotal = detalle.Subtotal });
 
