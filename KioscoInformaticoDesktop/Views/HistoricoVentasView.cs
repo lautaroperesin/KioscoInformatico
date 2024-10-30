@@ -30,7 +30,7 @@ namespace KioscoInformaticoDesktop.Views
             else
             {
                 numericTotalFacturado.Value = ventas.Sum(venta=>venta.Total);
-            }
+                }
         }
 
         private void DisplayDataGrid()

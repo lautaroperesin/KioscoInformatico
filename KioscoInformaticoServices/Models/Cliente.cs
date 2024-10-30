@@ -16,8 +16,8 @@ public partial class Cliente
 
     public DateTime FechaNacimiento { get; set; }
 
-    public int? LocalidadId { get; set; }
     [Required(ErrorMessage = "Debes asignar una localidad")]
+    public int? LocalidadId { get; set; }
     public virtual Localidad? Localidad { get; set; }
 
     public bool Eliminado { get; set; } = false;

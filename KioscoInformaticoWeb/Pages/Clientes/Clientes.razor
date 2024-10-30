@@ -1,14 +1,13 @@
 ﻿@page "/clientes"
 @inject IClienteService ClienteService
+@inject NavigationManager NavigationManager
 @inject SweetAlertService SweetAlert;
 
 <HeaderPage TitlePage="Clientes" />
 
 @if(clientes != null)
 {
-    <NavLink href="agregareditarcliente">
-        Agregar cliente
-    </NavLink>
+    <button class="btn btn-primary" @onclick="AgregarCliente">Agregar Cliente</button>
     <table class="table">
         <thead>
             <tr>
@@ -55,6 +54,11 @@ else
     protected override async Task OnInitializedAsync()
     {
         clientes = await ClienteService.GetAllAsync();
+    }
+
+    private void AgregarCliente()
+    {
+        NavigationManager.NavigateTo("/agregareditarcliente");
     }
 
     private async void Eliminar(Cliente cliente)
