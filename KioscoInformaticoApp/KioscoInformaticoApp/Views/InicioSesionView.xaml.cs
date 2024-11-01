@@ -38,5 +38,9 @@ public partial class InicioSesionView : ContentPage
         {
             await Navigation.PushAsync(new AgregarEditarProductoView(mensaje.ProductoAEditar));
         }
+        if (mensaje.Value == "AbrirKioscoShell")
+        {
+            await Navigation.PushAsync(new KioscoShell());
+        }
     }
 }
