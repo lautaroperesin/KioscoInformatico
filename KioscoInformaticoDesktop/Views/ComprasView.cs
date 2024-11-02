@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,14 +16,14 @@ using System.Windows.Forms;
 
 namespace KioscoInformaticoDesktop.Views
 {
-    public partial class VentasView : Form
+    public partial class ComprasView : Form
     {
-        ClienteService clienteService = new ClienteService();
         ProductoService productoService = new ProductoService();
-        IGenericService<Venta> ventaService = new GenericService<Venta>();
-        Venta venta = new Venta();
+        IGenericService<Compra> compraService = new GenericService<Compra>();
+        IGenericService<Proveedor> proveedorService = new GenericService<Proveedor>();
+        Compra compra = new Compra();
 
-        public VentasView()
+        public ComprasView()
         {
             InitializeComponent();
             AjustePantalla();
@@ -34,12 +33,12 @@ namespace KioscoInformaticoDesktop.Views
         {
             #region Carga de combos
             await Task.WhenAll(
-                Task.Run(async () => cboClientes.DataSource = await clienteService.GetAllAsync()),
+                Task.Run(async () => cboProveedores.DataSource = await proveedorService.GetAllAsync()),
                 Task.Run(async () => cboProductos.DataSource = await productoService.GetAllAsync())
                 );
 
-            cboClientes.DisplayMember = "Nombre";
-            cboClientes.ValueMember = "Id";
+            cboProveedores.DisplayMember = "Nombre";
+            cboProveedores.ValueMember = "Id";
 
             cboProductos.DisplayMember = "Nombre";
             cboProductos.ValueMember = "Id";
@@ -50,7 +49,7 @@ namespace KioscoInformaticoDesktop.Views
 
             numericPrecio.Value = 0;
             numericCantidad.Value = 1;
-            gridDetallesVenta.DataSource = venta.DetallesVenta.ToList();
+            gridDetallesCompra.DataSource = compra.DetallesCompra.ToList();
         }
 
         private void cboProductos_SelectedIndexChanged(object sender, EventArgs e)
@@ -75,15 +74,15 @@ namespace KioscoInformaticoDesktop.Views
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            var detalleVenta = new DetalleVenta
+            var detalleCompra = new DetalleCompra
             {
                 Producto = (Producto)cboProductos.SelectedItem,
                 ProductoId = (int)cboProductos.SelectedValue,
                 Cantidad = (int)numericCantidad.Value,
                 PrecioUnitario = numericPrecio.Value
             };
-            venta.DetallesVenta.Add(detalleVenta);
-            gridDetallesVenta.DataSource = venta.DetallesVenta.ToList();
+            compra.DetallesCompra.Add(detalleCompra);
+            gridDetallesCompra.DataSource = compra.DetallesCompra.ToList();
             cboProductos.SelectedIndex = -1;
             cboProductos.Focus();
             ActualizarTotalFactura();
@@ -91,40 +90,40 @@ namespace KioscoInformaticoDesktop.Views
 
         private void ActualizarTotalFactura()
         {
-            numericTotal.Value = venta.DetallesVenta.Sum(dv => dv.Subtotal);
+            numericTotal.Value = compra.DetallesCompra.Sum(dc => dc.Subtotal);
         }
 
-        private void gridDetallesVenta_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void gridDetallesCompra_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            gridDetallesVenta.OcultarColumnas(new string[] { "Id", "VentaId", "ProductoId", "Eliminado", "Venta" });
-            btnQuitar.Enabled = gridDetallesVenta.RowCount > 0;
+            gridDetallesCompra.OcultarColumnas(new string[] { "Id", "CompraId", "ProductoId", "Eliminado", "Compra" });
+            btnQuitar.Enabled = gridDetallesCompra.RowCount > 0;
         }
 
         private void btnQuitar_Click(object sender, EventArgs e)
         {
-            if (gridDetallesVenta.CurrentRow == null)
+            if (gridDetallesCompra.CurrentRow == null)
             {
-                MessageBox.Show("Debe seleccionar un detalle de venta");
+                MessageBox.Show("Debe seleccionar un detalle de compra");
                 return;
             }
-            var detalleVenta = (DetalleVenta)gridDetallesVenta.CurrentRow.DataBoundItem;
-            venta.DetallesVenta.Remove(detalleVenta);
-            gridDetallesVenta.DataSource = venta.DetallesVenta.ToList();
+            var detalleCompra = (DetalleCompra)gridDetallesCompra.CurrentRow.DataBoundItem;
+            compra.DetallesCompra.Remove(detalleCompra);
+            gridDetallesCompra.DataSource = compra.DetallesCompra.ToList();
             ActualizarTotalFactura();
         }
 
-        private async void btnFinalizarVenta_Click(object sender, EventArgs e)
+        private async void btnFinalizarCompra_Click(object sender, EventArgs e)
         {
-            venta.ClienteId = (int)cboClientes.SelectedValue;
-            venta.Cliente = (Cliente)cboClientes.SelectedItem;
-            venta.FormaPago = (FormaDePagoEnum)cboFormaPago.SelectedValue;
-            venta.Fecha = DateTime.Now;
+            compra.ProveedorId = (int)cboProveedores.SelectedValue;
+            compra.Proveedor = (Proveedor)cboProveedores.SelectedItem;
+            compra.FormaDePago = (FormaDePagoEnum)cboFormaPago.SelectedValue;
+            compra.Fecha = DateTime.Now;
 
-            venta.Total = numericTotal.Value;
-            venta.Iva = venta.Total * 0.21m;
-            var nuevaVenta = await ventaService.AddAsync(venta);
-            var facturaVentaViewReport = new FacturaVentaViewReport(nuevaVenta);
-            facturaVentaViewReport.ShowDialog();
+            compra.Total = numericTotal.Value;
+            compra.Iva = compra.Total * 0.21m;
+            var nuevaCompra = await compraService.AddAsync(compra);
+            var facturaCompraViewReport = new FacturaCompraViewReport(nuevaCompra);
+            facturaCompraViewReport.ShowDialog();
         }
     }
 }

@@ -14,6 +14,5 @@ public partial class Venta
     public decimal Iva { get; set; }
     public decimal Total { get; set; }
     public bool Eliminado { get; set; } = false;
-
     public virtual ICollection<DetalleVenta> DetallesVenta { get; set; } = new List<DetalleVenta>();
 }

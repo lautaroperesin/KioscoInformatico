@@ -9,10 +9,10 @@ public partial class DetalleVenta
     public int Id { get; set; }
     public int ProductoId { get; set; }
     public virtual Producto? Producto { get; set; } = null!;
-    public decimal PrecioUnitario { get; set; }
-    public int Cantidad { get; set; }
     public int VentaId { get; set; }
     public virtual Venta? Venta { get; set; } = null!;
+    public decimal PrecioUnitario { get; set; }
+    public int Cantidad { get; set; }
     public bool Eliminado { get; set; } = false;
 
     [NotMapped]
