@@ -1,6 +1,6 @@
 ﻿namespace KioscoInformaticoDesktop.ViewReports
 {
-    partial class FacturaCompraViewReport
+    partial class HistoricoVentasViewReport
     {
         /// <summary>
         /// Required designer variable.
@@ -30,17 +30,15 @@
         {
             SuspendLayout();
             // 
-            // FacturaCompraViewReport
+            // HistoricoVentasViewReport
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
-            Margin = new Padding(3, 4, 3, 4);
-            Name = "FacturaCompraViewReport";
-            StartPosition = FormStartPosition.CenterParent;
-            Text = "Factura Compra";
+            ClientSize = new Size(800, 450);
+            Name = "HistoricoVentasViewReport";
+            Text = "Historico Ventas";
             WindowState = FormWindowState.Maximized;
-            Load += FacturaCompraViewReport_Load;
+            Load += HistoricoVentasViewReport_Load;
             ResumeLayout(false);
         }
 

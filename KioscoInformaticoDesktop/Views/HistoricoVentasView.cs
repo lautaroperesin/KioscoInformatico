@@ -1,4 +1,5 @@
 ﻿using KioscoInformaticoDesktop.ExtensionMethods;
+using KioscoInformaticoDesktop.ViewReports;
 using KioscoInformaticoServices.Models;
 using KioscoInformaticoServices.Services;
 
@@ -29,18 +30,18 @@ namespace KioscoInformaticoDesktop.Views
             }
             else
             {
-                numericTotalFacturado.Value = ventas.Sum(venta=>venta.Total);
-                }
+                numericTotalFacturado.Value = ventas.Sum(venta => venta.Total);
+            }
         }
 
         private void DisplayDataGrid()
         {
             dataGridVentas.DataSource = ventas;
             dataGridVentas.OcultarColumnas(new string[] { "Id", "Eliminado", "ClienteId", "DetallesVenta" });
-            dataGridVentas.Columns["Fecha"].DefaultCellStyle.Format = "dd/mm/yyyy";
+            dataGridVentas.Columns["Fecha"].DefaultCellStyle.Format = "dd/MM/yyyy";
             dataGridVentas.Columns["Iva"].DefaultCellStyle.Format = "N2";
             dataGridVentas.Columns["Total"].DefaultCellStyle.Format = "N2";
-        
+
         }
 
         private void checkFiltrado_CheckedChanged(object sender, EventArgs e)
@@ -49,7 +50,7 @@ namespace KioscoInformaticoDesktop.Views
             if (checkFiltrado.Checked)
             {
                 dtpDesde.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-                dtpHasta.Value = DateTime.Now;
+                //dtpHasta.Value = DateTime.Now.Day(23, 59, 00);
                 DisplayFilterData();
                 CalcularTotal();
             }
@@ -64,7 +65,7 @@ namespace KioscoInformaticoDesktop.Views
         {
             dataGridVentas.DataSource = ventas.Where(venta => venta.Fecha >= dtpDesde.Value && venta.Fecha <= dtpHasta.Value).ToList();
             dataGridVentas.OcultarColumnas(new string[] { "Id", "Eliminado", "ClienteId", "DetallesVenta" });
-            dataGridVentas.Columns["Fecha"].DefaultCellStyle.Format = "dd/mm/yyyy";
+            dataGridVentas.Columns["Fecha"].DefaultCellStyle.Format = "dd/MM/yyyy";
             dataGridVentas.Columns["Iva"].DefaultCellStyle.Format = "N2";
             dataGridVentas.Columns["Total"].DefaultCellStyle.Format = "N2";
         }
@@ -73,6 +74,19 @@ namespace KioscoInformaticoDesktop.Views
         {
             DisplayFilterData();
             CalcularTotal();
+        }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            var tituloReporte = "Listado de ventas";
+            var ventasAImprimir = ventas;
+            if(checkFiltrado.Checked)
+            {
+                ventasAImprimir = ventas.Where(venta => venta.Fecha >= dtpDesde.Value && venta.Fecha <= dtpHasta.Value).ToList();
+                tituloReporte += $" desde {dtpDesde.Value.ToString("dd/MM/yyyy")} hasta {dtpHasta.Value.ToString("dd/MM/yyyy")}";
+            }
+            var historicoVentasViewReport = new HistoricoVentasViewReport(ventas, tituloReporte);
+            historicoVentasViewReport.ShowDialog();
         }
     }
 }

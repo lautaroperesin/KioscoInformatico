@@ -32,7 +32,7 @@ namespace KioscoInformaticoDesktop.ViewReports
         private void FacturaCompraViewReport_Load(object sender, EventArgs e)
         {
             reporte.LocalReport.ReportEmbeddedResource = "KioscoInformaticoDesktop.Reports.FacturaCompraReport.rdlc";
-            List<object> compra = new List<object> { new { Id = nuevaCompra.Id, Fecha = nuevaCompra.Fecha, ClienteNombre = nuevaCompra.Proveedor.Nombre, Total = nuevaCompra.Total, IVA = nuevaCompra.Iva, FormaPago = nuevaCompra.FormaDePago.ToString() } };
+            List<object> compra = new List<object> { new { Id = nuevaCompra.Id, Fecha = nuevaCompra.Fecha, ProveedorNombre = nuevaCompra.Proveedor.Nombre, Total = nuevaCompra.Total, IVA = nuevaCompra.Iva, FormaPago = nuevaCompra.FormaDePago.ToString() } };
 
             var detalleCompra = nuevaCompra.DetallesCompra.Select(detalle => new { ProductoNombre = detalle.Producto.Nombre, PrecioUnitario = detalle.PrecioUnitario, Cantidad = detalle.Cantidad, Subtotal = detalle.Subtotal });
 
