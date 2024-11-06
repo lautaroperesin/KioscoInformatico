@@ -27,6 +27,9 @@
                     <div class="col-md-12 d-flex justify-content-center">
                         <button class="btn btn-primary" @onclick="Loguear">Acceder</button>
                     </div>
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <button class="btn btn-secondary" @onclick="Registrar">Registrarse</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -76,5 +79,10 @@ else
         isAuthenticated = false;
         StateHasChanged();
         //NavigationManager.NavigateTo($"/");
+    }
+
+    private void Registrar()
+    {
+        NavigationManager.NavigateTo($"/signin");
     }
 }

@@ -85,7 +85,7 @@ namespace KioscoInformaticoDesktop.Views
                 ventasAImprimir = ventas.Where(venta => venta.Fecha >= dtpDesde.Value && venta.Fecha <= dtpHasta.Value).ToList();
                 tituloReporte += $" desde {dtpDesde.Value.ToString("dd/MM/yyyy")} hasta {dtpHasta.Value.ToString("dd/MM/yyyy")}";
             }
-            var historicoVentasViewReport = new HistoricoVentasViewReport(ventas, tituloReporte);
+            var historicoVentasViewReport = new HistoricoVentasViewReport(ventasAImprimir, tituloReporte);
             historicoVentasViewReport.ShowDialog();
         }
     }
