@@ -10,18 +10,20 @@ using System.Threading.Tasks;
 
 namespace KioscoInformaticoApp.ViewModels
 {
-    public class AgregarEditarProductoViewModel : ObjectNotification
-    {
+	public class AgregarEditarProductoViewModel : ObjectNotification
+	{
 		ProductoService productoService = new ProductoService();
 		private Producto editProduct;
 
 		public Producto EditProduct
 		{
 			get { return editProduct; }
-			set { editProduct = value;
+			set
+			{
+				editProduct = value;
 				OnPropertyChanged();
 				SettingData();
-            }
+			}
 		}
 
 		private void SettingData()
@@ -29,16 +31,18 @@ namespace KioscoInformaticoApp.ViewModels
 			Nombre = editProduct.Nombre;
 			Precio = editProduct.Precio;
 			Oferta = editProduct.Oferta;
-        }
+		}
 
-        private string nombre;
+		private string nombre;
 
 		public string Nombre
 		{
 			get { return nombre; }
-			set { nombre = value;
+			set
+			{
+				nombre = value;
 				OnPropertyChanged();
-		    }
+			}
 		}
 
 		private decimal precio;
@@ -46,9 +50,11 @@ namespace KioscoInformaticoApp.ViewModels
 		public decimal Precio
 		{
 			get { return precio; }
-			set { precio = value;
+			set
+			{
+				precio = value;
 				OnPropertyChanged();
-		    }
+			}
 		}
 
 		private bool oferta;
@@ -56,38 +62,40 @@ namespace KioscoInformaticoApp.ViewModels
 		public bool Oferta
 		{
 			get { return oferta; }
-			set { oferta = value;
+			set
+			{
+				oferta = value;
 				OnPropertyChanged();
 			}
 		}
 
 		public Command SaveProductCommand { get; }
 
-        public AgregarEditarProductoViewModel()
+		public AgregarEditarProductoViewModel()
 		{
-			SaveProductCommand = new Command(async ()=> await SaveProduct());
-        }
+			SaveProductCommand = new Command(async () => await SaveProduct());
+		}
 
 		private async Task SaveProduct()
 		{
-            if (EditProduct != null)
-            {
-                editProduct.Nombre = Nombre;
-                editProduct.Precio = Precio;
-                editProduct.Oferta = Oferta;
-                await productoService.UpdateAsync(editProduct);
-            }
+			if (EditProduct != null)
+			{
+				editProduct.Nombre = Nombre;
+				editProduct.Precio = Precio;
+				editProduct.Oferta = Oferta;
+				await productoService.UpdateAsync(editProduct);
+			}
 			else
 			{
-                var producto = new Producto()
-                {
-                    Nombre = Nombre,
-                    Precio = Precio,
-                    Oferta = Oferta
-                };
-                await productoService.AddAsync(producto);
-            }
-            WeakReferenceMessenger.Default.Send(new Message("CerrarVentana"));
+				var producto = new Producto()
+				{
+					Nombre = Nombre,
+					Precio = Precio,
+					Oferta = Oferta
+				};
+				await productoService.AddAsync(producto);
+			}
+			await Shell.Current.GoToAsync("//ListaProductos");
         }
-    }
+	}
 }

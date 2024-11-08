@@ -61,13 +61,13 @@ namespace KioscoInformaticoApp.ViewModels
             GetProducts();
         }
 
-        private async Task FiltrarProductos()
+        public async Task FiltrarProductos()
         {
             var productsLeaked = productListToFilter.Where(p => p.Nombre.ToLower().Contains(filterProducts.ToLower())).ToList();
             Products = new ObservableCollection<Producto>(productsLeaked);
         }
 
-        private async Task GetProducts()
+        public async Task GetProducts()
         {
             FilterProducts = string.Empty;
             IsRefreshing = true;

@@ -81,12 +81,22 @@ namespace KioscoInformaticoApp.ViewModels
 
         private async Task EditProduct()
         {
-            WeakReferenceMessenger.Default.Send(new Message("EditarProducto") { ProductoAEditar = selectedProduct });
+            var navigationParameter = new ShellNavigationQueryParameters
+            {
+                { "ProductoAEditar", SelectedProduct }
+            };
+            await Shell.Current.GoToAsync($"//AgregarEditarProducto", navigationParameter);
+            //WeakReferenceMessenger.Default.Send(new Message("EditarProducto") { ProductoAEditar = selectedProduct });
         }
 
         private async Task AddProduct()
         {
-            WeakReferenceMessenger.Default.Send(new Message("AgregarProducto"));
+            var navigationParameter = new ShellNavigationQueryParameters
+            {
+                { "ProductoAEditar", null }
+            };
+            await Shell.Current.GoToAsync($"//AgregarEditarProducto", navigationParameter);
+            //WeakReferenceMessenger.Default.Send(new Message("AgregarProducto"));
         }
 
         private async Task FiltrarProductos()

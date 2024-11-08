@@ -7,39 +7,40 @@
     <ContentPage.BindingContext>
         <viewModels:ProductosViewModel/>
     </ContentPage.BindingContext>
-    <ScrollView HeightRequest="300" HorizontalOptions="Center">
-    <VerticalStackLayout>
-        <Label 
-            Text="LISTA DE PRODUCTOS"
-            VerticalOptions="Center" 
-            FontSize="Header"
-            HorizontalOptions="Center" />
-            <Entry Placeholder="Buscar productos..."
+    <Grid RowDefinitions="Auto, *, Auto, Auto">
+        <Entry Placeholder="Buscar productos..."
                Text="{Binding FilterProducts}"
                HorizontalOptions="Center"
-               VerticalOptions="Center"/>
-            <ListView ItemsSource="{Binding Products}"
-                      SelectedItem="{Binding SelectedProduct}"
-                      SelectionMode="Single"
-                      IsPullToRefreshEnabled="True"
-                      RefreshCommand="{Binding GetProductsCommand}"
-                      IsRefreshing="{Binding IsRefreshing}">
+               VerticalOptions="Center"
+               Margin="0,10,0,10"
+               Grid.Row="0"/>
+        <ScrollView Grid.Row="1">
+            <ListView 
+                ItemsSource="{Binding Products}"
+                SelectedItem="{Binding SelectedProduct}"
+                SelectionMode="Single"
+                IsPullToRefreshEnabled="True"
+                RefreshCommand="{Binding GetProductsCommand}"
+                IsRefreshing="{Binding IsRefreshing}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding Nombre}"
-                                  Detail="{Binding Precio}"
-                                  TextColor="White"/>
+                                  Detail="{Binding Precio, StringFormat='${0:F2}'}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="Agregar producto"
-                    Command="{Binding AddProductCommand}"
-                    HorizontalOptions="Center"
-                    Margin="0,10,0,10"/>
-            <Button Text="Editar producto"
-                    Command="{Binding EditProductCommand}"
-                    HorizontalOptions="Center"
-                    Margin="0,10,0,10"/>
-        </VerticalStackLayout>
-     </ScrollView>
+        </ScrollView>
+        <Button Text="Agregar producto"
+                Command="{Binding AddProductCommand}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Margin="0,10,0,10"
+                Grid.Row="2"/>
+        <Button Text="Editar producto"
+                Command="{Binding EditProductCommand}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Margin="0,10,0,10"
+                Grid.Row="3"/>
+    </Grid>
 </ContentPage>
