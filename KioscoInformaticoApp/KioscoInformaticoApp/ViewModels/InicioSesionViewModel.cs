@@ -1,5 +1,11 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using Firebase.Auth;
+using Firebase.Auth.Providers;
+using Firebase.Auth.Repository;
 using KioscoInformaticoApp.Class;
+using Microsoft.Maui.ApplicationModel.Communication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,60 +14,92 @@ using System.Threading.Tasks;
 
 namespace KioscoInformaticoApp.ViewModels
 {
-    public class InicioSesionViewModel : ObjectNotification
+    public partial class InicioSesionViewModel : ObservableObject
     {
-        private string email;
-        public string Email
-        {
-            get { return email; }
-            set
-            {
-                email = value;
-                OnPropertyChanged();
-                LoginCommand.ChangeCanExecute();
-            }
-        }
+        public readonly FirebaseAuthClient _clientAuth;
+        private FileUserRepository _userRepository;
+        private UserInfo _userInfo;
+        private FirebaseCredential _firebaseCredential;
 
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(LoginCommand))]
+        private string mail;
+
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(LoginCommand))]
         private string password;
-        public string Password
-        {
-            get { return password; }
-            set
-            {
-                password = value;
-                OnPropertyChanged();
-                LoginCommand.ChangeCanExecute();
-            }
-        }
-
+            
+        [ObservableProperty]
         private bool rememberPassword;
-        public bool RememberPassword
-        {
-            get { return rememberPassword; }
-            set 
-            {
-                rememberPassword = value;
-                OnPropertyChanged();
-            }
-        }
 
-        public Command LoginCommand { get; }
-        public Command RegisterCommand { get; }
+        public IRelayCommand LoginCommand { get; }
+        public IRelayCommand RegisterCommand { get; }
+
         public InicioSesionViewModel()
         {
-            LoginCommand = new Command(Login, AllowLogin);
+            _clientAuth = new FirebaseAuthClient(new FirebaseAuthConfig()
+            {
+                ApiKey = "AIzaSyDXfbseUr4hjit-AUunCWLnjOTjaHGC_kw",
+                AuthDomain = "kioscoinformatico-fcfea.firebaseapp.com",
+                Providers = new Firebase.Auth.Providers.FirebaseAuthProvider[]
+                {
+                    new EmailProvider()
+                }
+            });
+            _userRepository = new FileUserRepository("KioscoInformatico");
+            ChequearSiHayUsuarioAlmacenado();
+            LoginCommand = new RelayCommand(Login, AllowLogin);
+            RegisterCommand = new RelayCommand(Register);
         }
 
-        private bool AllowLogin(object arg)
+        private async void Register()
         {
-            return !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password);
+            await Shell.Current.GoToAsync("Registrarse");
         }
 
-        public void Login(object obj)
+        private void ChequearSiHayUsuarioAlmacenado()
         {
-            //WeakReferenceMessenger.Default.Send(new Message("AbrirKioscoShell"));
-            var shellKiosco = (KioscoShell) App.Current.MainPage;
-            shellKiosco.EnableAppAfterLogin();
+            if (_userRepository.UserExists())
+            {
+                (_userInfo, _firebaseCredential) = _userRepository.ReadUser();
+
+                var kioscoShell = (KioscoShell)App.Current.MainPage;
+                kioscoShell.EnableAppAfterLogin();
+            }
+        }
+
+        public bool AllowLogin() => !string.IsNullOrEmpty(Mail) && !string.IsNullOrEmpty(Password);
+
+        public async void Login()
+        {
+            try
+            {
+
+                var userCredential = await _clientAuth.SignInWithEmailAndPasswordAsync(mail, password);
+                if (userCredential.User.Info.IsEmailVerified == false)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Inicio de sesión", "Debe verificar su correo electrónico", "Ok");
+                    return;
+                }
+
+                if (rememberPassword)
+                {
+                    _userRepository.SaveUser(userCredential.User);
+                }
+                else
+                {
+                    _userRepository.DeleteUser();
+                }
+
+                var kioscoShell = (KioscoShell)App.Current.MainPage;
+                kioscoShell.EnableAppAfterLogin();
+
+            }
+            catch (FirebaseAuthException error)
+            {
+                await Application.Current.MainPage.DisplayAlert("Inicio de sesión", "Ocurrió un problema:" + error.Reason, "Ok");
+
+            }
         }
     }
 }
