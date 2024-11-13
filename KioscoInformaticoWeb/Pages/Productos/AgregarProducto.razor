@@ -10,8 +10,18 @@
     <div class="form-group">
         <label for="Nombre">Nombre</label>
         <InputText id="Nombre" class="form-control" @bind-Value="producto.Nombre" />
+    </div>
+
+    <div class="form-group">
         <label for="Precio">Precio</label>
         <InputNumber id="Precio" class="form-control" @bind-Value="producto.Precio" />
+        </div>
+
+    <div class="form-group">
+        <label for="Imagen">Imagen</label>
+        <InputNumber id="Imagen" class="form-control" @bind-Value="producto.Imagen" />
+        <ImageUpload OnUploadFile="ArchivoSubido" />
+        <img class="card-img mb-2" src="@producto.Imagen" />
     </div>
 
     <button type="submit" class="btn btn-primary">Guardar</button>
@@ -31,5 +41,10 @@
     {
         await ProductoService.AddAsync(producto);
         NavigationManager.NavigateTo("/productos");
+    }
+
+    private async Task ArchivoSubido(string url)
+    {
+        producto.Imagen = url;
     }
 }

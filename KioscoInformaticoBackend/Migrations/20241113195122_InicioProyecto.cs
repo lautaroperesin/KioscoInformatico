@@ -43,7 +43,9 @@ namespace KioscoInformaticoBackend.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Precio = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     Eliminado = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Oferta = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    Oferta = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Imagen = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -64,7 +66,7 @@ namespace KioscoInformaticoBackend.Migrations
                     Telefonos = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     FechaNacimiento = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    LocalidadId = table.Column<int>(type: "int", nullable: true),
+                    LocalidadId = table.Column<int>(type: "int", nullable: false),
                     Eliminado = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
@@ -74,7 +76,8 @@ namespace KioscoInformaticoBackend.Migrations
                         name: "FK_Clientes_Localidades_LocalidadId",
                         column: x => x.LocalidadId,
                         principalTable: "Localidades",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -113,9 +116,9 @@ namespace KioscoInformaticoBackend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    FormaPago = table.Column<int>(type: "int", nullable: false),
-                    ClienteId = table.Column<int>(type: "int", nullable: false),
                     Fecha = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    ClienteId = table.Column<int>(type: "int", nullable: false),
+                    FormaPago = table.Column<int>(type: "int", nullable: false),
                     Iva = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     Total = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     Eliminado = table.Column<bool>(type: "tinyint(1)", nullable: false)
@@ -138,11 +141,11 @@ namespace KioscoInformaticoBackend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    FormaDePago = table.Column<int>(type: "int", nullable: false),
-                    Iva = table.Column<int>(type: "int", nullable: false),
-                    Total = table.Column<int>(type: "int", nullable: false),
                     Fecha = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ProveedorId = table.Column<int>(type: "int", nullable: true),
+                    FormaDePago = table.Column<int>(type: "int", nullable: false),
+                    Iva = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    Total = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     Eliminado = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
@@ -162,10 +165,10 @@ namespace KioscoInformaticoBackend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    VentaId = table.Column<int>(type: "int", nullable: false),
                     ProductoId = table.Column<int>(type: "int", nullable: false),
-                    Cantidad = table.Column<int>(type: "int", nullable: false),
+                    VentaId = table.Column<int>(type: "int", nullable: false),
                     PrecioUnitario = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
                     Eliminado = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
@@ -193,9 +196,9 @@ namespace KioscoInformaticoBackend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ProductoId = table.Column<int>(type: "int", nullable: false),
+                    CompraId = table.Column<int>(type: "int", nullable: false),
                     PrecioUnitario = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
-                    CompraId = table.Column<int>(type: "int", nullable: false),
                     Eliminado = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
@@ -228,12 +231,12 @@ namespace KioscoInformaticoBackend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Productos",
-                columns: new[] { "Id", "Eliminado", "Nombre", "Oferta", "Precio" },
+                columns: new[] { "Id", "Eliminado", "Imagen", "Nombre", "Oferta", "Precio" },
                 values: new object[,]
                 {
-                    { 1, false, "Coca-Cola 2lts", false, 2500m },
-                    { 2, false, "Papas Lays 160grs", false, 1500m },
-                    { 3, false, "Agua Mineral 2lts", false, 2000m }
+                    { 1, false, null, "Coca-Cola 2lts", false, 2500m },
+                    { 2, false, null, "Papas Lays 160grs", false, 1500m },
+                    { 3, false, null, "Agua Mineral 2lts", false, 2000m }
                 });
 
             migrationBuilder.InsertData(
@@ -269,10 +272,10 @@ namespace KioscoInformaticoBackend.Migrations
                 columns: new[] { "Id", "Eliminado", "Fecha", "FormaDePago", "Iva", "ProveedorId", "Total" },
                 values: new object[,]
                 {
-                    { 1, false, new DateTime(2021, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 21, 1, 1000 },
-                    { 2, false, new DateTime(2021, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 10, 2, 2000 },
-                    { 3, false, new DateTime(2021, 5, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 5, 3, 3000 },
-                    { 4, false, new DateTime(2021, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 0, 4, 4000 }
+                    { 1, false, new DateTime(2021, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 21m, 1, 1000m },
+                    { 2, false, new DateTime(2021, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 10m, 2, 2000m },
+                    { 3, false, new DateTime(2021, 5, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 5m, 3, 3000m },
+                    { 4, false, new DateTime(2021, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 0m, 4, 4000m }
                 });
 
             migrationBuilder.InsertData(
@@ -280,9 +283,9 @@ namespace KioscoInformaticoBackend.Migrations
                 columns: new[] { "Id", "ClienteId", "Eliminado", "Fecha", "FormaPago", "Iva", "Total" },
                 values: new object[,]
                 {
-                    { 1, 1, false, new DateTime(2024, 10, 8, 16, 37, 21, 134, DateTimeKind.Local).AddTicks(7144), 0, 21m, 3000m },
-                    { 2, 2, false, new DateTime(2024, 10, 8, 16, 37, 21, 134, DateTimeKind.Local).AddTicks(7186), 1, 10m, 5000m },
-                    { 3, 1, false, new DateTime(2024, 10, 8, 16, 37, 21, 134, DateTimeKind.Local).AddTicks(7191), 2, 21m, 8000m }
+                    { 1, 1, false, new DateTime(2024, 11, 13, 16, 51, 20, 8, DateTimeKind.Local).AddTicks(5951), 0, 21m, 3000m },
+                    { 2, 2, false, new DateTime(2024, 11, 13, 16, 51, 20, 8, DateTimeKind.Local).AddTicks(5977), 1, 10m, 5000m },
+                    { 3, 1, false, new DateTime(2024, 11, 13, 16, 51, 20, 8, DateTimeKind.Local).AddTicks(5980), 2, 21m, 8000m }
                 });
 
             migrationBuilder.InsertData(
